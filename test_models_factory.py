@@ -6,11 +6,13 @@ def test_address():
     AddressFactory()
     AddressFactory()
     AddressFactory()
-    get_address()
+    result = get_address()
+    assert len(result) == 3
 
 
 def test_check_emails():
     AddressFactory()
     AddressFactory(email_address='user_2@gmailcom')
     AddressFactory(email_address='user_3gmail.com')
-    check_emails()
+    result = check_emails()
+    assert not result

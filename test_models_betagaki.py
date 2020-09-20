@@ -29,7 +29,8 @@ def test_get_address(session):
     session.commit()
 
     # Execute test
-    get_address()
+    result = get_address()
+    assert len(result) == 3
 
 
 def test_check_email(session):
@@ -58,4 +59,5 @@ def test_check_email(session):
     session.commit()
 
     # Execute test
-    check_emails()
+    result = check_emails()
+    assert not result

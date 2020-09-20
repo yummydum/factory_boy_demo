@@ -31,9 +31,10 @@ def test_data(session):
     session.commit()
 
 
-def test_aaa(test_data):
-    get_address()
+def test_get_address(test_data):
+    result = get_address()
+    assert len(result) == 3
 
 
-def test_bbb(test_data):
+def test_check_emails(test_data):
     check_emails()
