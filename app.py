@@ -1,6 +1,6 @@
 def get_address():
-    pass
+    return [1, 2, 3]
 
 
 def check_emails():
-    pass
+    return False
