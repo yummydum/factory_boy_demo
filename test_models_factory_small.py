@@ -1,6 +1,13 @@
 import pytest
 from factories import AddressFactory
 from app import get_address, check_emails
+from conftest import SESSION
+
+
+@pytest.fixture()
+def teardown():
+    yield
+    SESSION.rollback()
 
 
 @pytest.mark.small
@@ -19,7 +26,7 @@ def test_check_emails():
     assert not result
 
 
-def test_check_emails_med():
+def test_check_emails_med(teardown):
     AddressFactory()
     AddressFactory(email_address='user_2@gmailcom')
     AddressFactory(email_address='user_3gmail.com')
