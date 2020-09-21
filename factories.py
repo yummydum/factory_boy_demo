@@ -8,7 +8,6 @@ class UserFactory(SQLAlchemyModelFactory):
     class Meta:
         model = User
         sqlalchemy_session = SESSION
-        sqlalchemy_session_persistence = 'commit'
 
     user_id = Sequence(lambda n: n)
     name = Sequence(lambda n: f'name_{n}')
@@ -20,7 +19,6 @@ class AddressFactory(SQLAlchemyModelFactory):
     class Meta:
         model = Address
         sqlalchemy_session = SESSION
-        sqlalchemy_session_persistence = 'commit'
 
     address_id = Sequence(lambda n: n)
     email_address = Sequence(lambda n: f'address_{n}@gmail.com')
