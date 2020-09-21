@@ -1,5 +1,13 @@
+import pytest
 from models import User, Address
 from app import get_address, check_emails
+from conftest import SESSION
+
+
+@pytest.fixture()
+def session():
+    yield SESSION
+    SESSION.rollback()
 
 
 def test_get_address(session):
@@ -11,22 +19,20 @@ def test_get_address(session):
 
     for user in [user1, user2, user3]:
         session.add(user)
-    session.commit()
 
     # Add address
     address1 = Address(email_address='address_1@gmail.com',
                        user_id=user1.user_id,
                        user=user1)
-    address2 = Address(email_address='address_2.com',
+    address2 = Address(email_address='address_2@gmail.com',
                        user_id=user2.user_id,
                        user=user2)
-    address3 = Address(email_address='address_3.com',
+    address3 = Address(email_address='address_3@gmail.com',
                        user_id=user3.user_id,
                        user=user3)
 
     for address in [address1, address2, address3]:
         session.add(address)
-    session.commit()
 
     # Execute test
     result = get_address()
@@ -41,7 +47,6 @@ def test_check_email(session):
 
     for user in [user1, user2, user3]:
         session.add(user)
-    session.commit()
 
     # Add address
     address1 = Address(email_address='address_1@gmail.com',
@@ -56,7 +61,6 @@ def test_check_email(session):
 
     for address in [address1, address2, address3]:
         session.add(address)
-    session.commit()
 
     # Execute test
     result = check_emails()

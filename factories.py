@@ -1,15 +1,13 @@
 from factory.alchemy import SQLAlchemyModelFactory
 from factory import Faker, Sequence, SubFactory, Iterator, SelfAttribute
 from models import User, Address
-from conftest import make_session
-
-Session = make_session()
+from conftest import SESSION
 
 
 class UserFactory(SQLAlchemyModelFactory):
     class Meta:
         model = User
-        sqlalchemy_session = Session
+        sqlalchemy_session = SESSION
         sqlalchemy_session_persistence = 'commit'
 
     user_id = Sequence(lambda n: n)
@@ -21,7 +19,7 @@ class UserFactory(SQLAlchemyModelFactory):
 class AddressFactory(SQLAlchemyModelFactory):
     class Meta:
         model = Address
-        sqlalchemy_session = Session
+        sqlalchemy_session = SESSION
         sqlalchemy_session_persistence = 'commit'
 
     address_id = Sequence(lambda n: n)
