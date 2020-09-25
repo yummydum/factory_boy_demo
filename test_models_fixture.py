@@ -1,6 +1,6 @@
 import pytest
 from models import User, Address
-from app import get_address, check_emails
+from app import get_address, is_gmails
 from conftest import SESSION
 
 
@@ -12,7 +12,6 @@ def session():
 
 @pytest.fixture
 def test_data(session):
-    # Add user
     # Add user
     user1 = User(name='name_1', fullname='fullname_1', nickname='nickname_1')
     user2 = User(name='name_2', fullname='fullname_2', nickname='nickname_2')
@@ -36,10 +35,11 @@ def test_data(session):
         session.add(address)
 
 
-def test_get_address(test_data):
-    result = get_address()
+def test_get_address(session, test_data):
+    result = get_address(session)
     assert len(result) == 3
 
 
-def test_check_emails(test_data):
-    check_emails()
+# Fails!
+def test_is_gmails(session, test_data):
+    assert not is_gmails(session)
