@@ -21,6 +21,6 @@ class AddressFactory(SQLAlchemyModelFactory):
         sqlalchemy_session = SESSION
 
     address_id = Sequence(lambda n: n)
-    email_address = Sequence(lambda n: f'address_{n}@gmail.com')
+    email_address = Sequence(lambda n: f'address_{n}@hogemail.com')
     user = SubFactory(UserFactory)
     user_id = SelfAttribute('user.user_id')

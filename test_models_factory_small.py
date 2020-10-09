@@ -1,6 +1,6 @@
 import pytest
 from factories import AddressFactory
-from app import get_address, is_gmails
+from app import get_addresses, is_hogemails
 from conftest import SESSION
 
 
@@ -11,23 +11,23 @@ def session():
 
 
 @pytest.mark.small
-def test_is_gmails(monkeypatch):
+def test_is_hogemails(monkeypatch):
     data = [
         AddressFactory.build(),
-        AddressFactory.build(email_address='address_2@gmali.com'),
-        AddressFactory.build(email_address='address_3@gmailcom')
+        AddressFactory.build(email_address='address_2@hogemali.com'),
+        AddressFactory.build(email_address='address_3@hogemailcom')
     ]
 
     import app
-    monkeypatch.setattr(app, 'get_address', lambda x: data)
+    monkeypatch.setattr(app, 'get_addresses', lambda x: data)
 
-    result = is_gmails('session mock')
+    result = is_hogemails('session mock')
     assert not result
 
 
-def test_is_gmails_med(session):
+def test_is_hogemails_med(session):
     AddressFactory()
-    AddressFactory(email_address='address_2@gmali.com')
-    AddressFactory(email_address='address_3@gmailcom')
-    result = is_gmails(session)
+    AddressFactory(email_address='address_2@hogemali.com')
+    AddressFactory(email_address='address_3@hogemailcom')
+    result = is_hogemails(session)
     assert not result

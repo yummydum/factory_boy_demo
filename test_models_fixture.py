@@ -1,6 +1,6 @@
 import pytest
 from models import User, Address
-from app import get_address, is_gmails
+from app import get_addresses, is_hogemails
 from conftest import SESSION
 
 
@@ -21,13 +21,13 @@ def test_data(session):
         session.add(user)
 
     # Add address
-    address1 = Address(email_address='address_1@gmail.com',
+    address1 = Address(email_address='address_1@hogemail.com',
                        user_id=user1.user_id,
                        user=user1)
-    address2 = Address(email_address='address_2@gmail.com',
+    address2 = Address(email_address='address_2@hogemail.com',
                        user_id=user2.user_id,
                        user=user2)
-    address3 = Address(email_address='address_3@gmail.com',
+    address3 = Address(email_address='address_3@hogemail.com',
                        user_id=user3.user_id,
                        user=user3)
 
@@ -35,11 +35,11 @@ def test_data(session):
         session.add(address)
 
 
-def test_get_address(session, test_data):
-    result = get_address(session)
+def test_get_addresses(session, test_data):
+    result = get_addresses(session)
     assert len(result) == 3
 
 
 # Fails!
-def test_is_gmails(session, test_data):
-    assert not is_gmails(session)
+def test_is_hogemails(session, test_data):
+    assert not is_hogemails(session)
