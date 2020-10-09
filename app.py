@@ -1,4 +1,4 @@
-from models import User, Address
+from models import Address
 
 
 def get_addresses(session):
